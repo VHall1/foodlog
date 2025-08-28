@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer:latest
+    ports:
+      - 8080:8080
+
+volumes:
+  postgres_data:
+    driver: local
