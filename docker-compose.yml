@@ -1,4 +1,9 @@
 services:
+  adminer:
+    image: adminer:latest
+    ports:
+      - 8080:8080
+
   postgres:
     image: postgres:latest
     volumes:
@@ -8,10 +13,12 @@ services:
     ports:
       - 5432:5432
 
-  adminer:
-    image: adminer:latest
+  service.identity:
+    build:
+      context: .
+      dockerfile: service.identity/Dockerfile
     ports:
-      - 8080:8080
+      - 9000:80
 
 volumes:
   postgres_data:

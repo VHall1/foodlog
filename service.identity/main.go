@@ -10,7 +10,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/vhall1/foodlog/services.identity/handler"
+	"github.com/vhall1/foodlog/service.identity/handler"
 )
 
 func main() {
