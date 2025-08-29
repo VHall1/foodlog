@@ -17,7 +17,7 @@ import (
 
 func main() {
 	svc := bootstrap.NewService("service.identity")
-	db := svc.GetDB()
+	db := svc.Postgres()
 
 	mux := http.NewServeMux()
 	svc.NewHttpServer(loggerMiddleware(mux))

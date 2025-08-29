@@ -3,8 +3,6 @@ package dao
 import (
 	"database/sql"
 	"time"
-
-	_ "github.com/lib/pq"
 )
 
 type PostgresUserDAO struct {

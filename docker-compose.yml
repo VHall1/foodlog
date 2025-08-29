@@ -17,6 +17,10 @@ services:
     build:
       context: .
       dockerfile: service.identity/Dockerfile
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     ports:
       - 9000:80
 

@@ -38,12 +38,10 @@ func (s *service) ShutdownHttpServer(ctx context.Context) error {
 	return s.server.Shutdown(ctx)
 }
 
-func (s *service) GetDB() *sql.DB {
+func (s *service) Postgres() *sql.DB {
 	if s.db == nil {
 		var err error
-		// TODO: pull string from config
-		s.db, err = sql.Open("postgres", "host=postgres port=5432 user=postgres password=postgres dbname=postgres sslmode=disable")
-		if err != nil {
+		if s.db, err = initPostgres(); err != nil {
 			log.Fatal(err)
 		}
 	}
