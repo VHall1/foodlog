@@ -12,7 +12,7 @@ type psqlConfig struct {
 	Host         string `envconfig:"POSTGRES_HOST"`
 	Username     string `envconfig:"POSTGRES_USER"`
 	Password     string `envconfig:"POSTGRES_PASSWORD"`
-	DatabaseName string `envconfig:"default=postgres"`
+	DatabaseName string `envconfig:"POSTGRES_DB,default=postgres"`
 }
 
 func initPostgres() (*sql.DB, error) {
