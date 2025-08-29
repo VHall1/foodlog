@@ -25,7 +25,7 @@ func (d *UserDAO) CreateUser(user *User) error {
 	return d.db.QueryRow(query, user.Name, updatedAt).Scan(&user.ID, &user.CreatedAt, &user.UpdatedAt)
 }
 
-func (d *UserDAO) GetUserByID(id string) (*User, error) {
+func (d *UserDAO) GetUserByID(id uint32) (*User, error) {
 	query := `SELECT "id", "name", "createdAt", "updatedAt" FROM "User" WHERE "id" = $1`
 	user := &User{}
 	err := d.db.QueryRow(query, id).Scan(&user.ID, &user.Name, &user.CreatedAt, &user.UpdatedAt)

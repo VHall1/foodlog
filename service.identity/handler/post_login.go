@@ -9,7 +9,7 @@ import (
 )
 
 type loginRequest struct {
-	Id string `json:"id"`
+	Id uint32 `json:"id"`
 }
 
 func (r *Router) PostLogin() http.Handler {
@@ -23,7 +23,7 @@ func (r *Router) PostLogin() http.Handler {
 
 		user, err := userDAO.GetUserByID(req.Id)
 		if err != nil {
-			log.Default().Printf("Error getting user by ID %s: %v", req.Id, err)
+			log.Default().Printf("Error getting user by ID %d: %v", req.Id, err)
 			http.Error(w, "user not found", http.StatusNotFound)
 			return
 		}
