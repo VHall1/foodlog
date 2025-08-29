@@ -9,10 +9,7 @@ type Router struct {
 	Database *sql.DB
 }
 
-type handler interface {
-	GetLogin() http.Handler
-}
-
-func SetupRoutes(r *http.ServeMux, h handler) {
-	r.Handle("POST /login", h.GetLogin())
+func SetupRoutes(h *http.ServeMux, r *Router) {
+	h.Handle("POST /login", r.PostLogin())
+	h.Handle("POST /register", r.PostRegister())
 }
