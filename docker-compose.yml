@@ -13,17 +13,17 @@ services:
     ports:
       - 5432:5432
 
-  service.identity:
-    build:
-      context: .
-      dockerfile: service.identity/Dockerfile
-    environment:
-      POSTGRES_DB: identity
-      POSTGRES_HOST: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - 9000:80
+  # service.identity:
+  #   build:
+  #     context: .
+  #     dockerfile: service.identity/Dockerfile
+  #   environment:
+  #     POSTGRES_DB: identity
+  #     POSTGRES_HOST: postgres
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #   ports:
+  #     - 9000:80
 
 volumes:
   postgres_data:
