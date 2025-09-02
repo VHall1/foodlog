@@ -5,8 +5,10 @@ import { redirect } from "next/navigation";
 import { registerRequestSchema } from "./dto";
 
 export async function POST(request: Request) {
-  const payload = await request.json();
-  const { success, data } = registerRequestSchema.safeParse(payload);
+  const formData = await request.formData();
+  const { success, data } = registerRequestSchema.safeParse(
+    Object.fromEntries(formData)
+  );
 
   if (!success) {
     return new Response("Invalid request", { status: 400 });

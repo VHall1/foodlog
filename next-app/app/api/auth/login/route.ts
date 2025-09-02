@@ -4,8 +4,10 @@ import { redirect } from "next/navigation";
 import { loginRequestSchema } from "./dto";
 
 export async function POST(request: Request) {
-  const payload = await request.json();
-  const { success, data } = loginRequestSchema.safeParse(payload);
+  const formData = await request.formData();
+  const { success, data } = loginRequestSchema.safeParse(
+    Object.fromEntries(formData)
+  );
 
   if (!success) {
     return new Response("Invalid request", { status: 400 });
