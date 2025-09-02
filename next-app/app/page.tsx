@@ -1,3 +1,7 @@
-export default function Home() {
-  return <div>Hello</div>;
+import { getUserId } from "@/lib/auth";
+
+export default async function Home() {
+  const userId = await getUserId();
+
+  return <div>Hello {userId}</div>;
 }
