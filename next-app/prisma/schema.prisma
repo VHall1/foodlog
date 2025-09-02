@@ -16,12 +16,12 @@ datasource db {
 
 model User {
   id        String   @id @default(uuid())
-  name      String
+  name      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  days  Day[]
-  meals Meal[]
+  days Day[]
+  logs Foodlog[]
 }
 
 model Day {
@@ -35,7 +35,7 @@ model Day {
   userId String
 }
 
-model Meal {
+model Foodlog {
   id          String   @id @default(uuid())
   date        DateTime
   calories    Int
