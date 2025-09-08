@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -12,6 +11,7 @@ import (
 	"time"
 
 	"github.com/vhall1/foodlog/lib/bootstrap"
+	"github.com/vhall1/foodlog/lib/util"
 	"github.com/vhall1/foodlog/service.identity/handler"
 )
 
@@ -23,7 +23,7 @@ func main() {
 		Database: svc.Postgres(),
 	})
 
-	s := svc.NewHttpServer(loggerMiddleware(mux))
+	s := svc.NewHttpServer(util.LoggerMiddleware(mux))
 
 	fmt.Println("Starting server on :80")
 
@@ -47,13 +47,4 @@ func main() {
 	}
 
 	fmt.Println("Server gracefully stopped")
-}
-
-func loggerMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		start := time.Now()
-		log.Printf("%s %s from %s", r.Method, r.URL.Path, r.RemoteAddr)
-		next.ServeHTTP(w, r)
-		log.Printf("Completed in %v", time.Since(start))
-	})
 }
