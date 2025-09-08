@@ -19,11 +19,11 @@ func main() {
 	svc := bootstrap.NewService("service.identity")
 
 	mux := http.NewServeMux()
-	s := svc.NewHttpServer(loggerMiddleware(mux))
-
 	handler.SetupRoutes(mux, &handler.Router{
 		Database: svc.Postgres(),
 	})
+
+	s := svc.NewHttpServer(loggerMiddleware(mux))
 
 	fmt.Println("Starting server on :80")
 
