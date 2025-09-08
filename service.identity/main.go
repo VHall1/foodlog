@@ -19,7 +19,7 @@ func main() {
 	svc := bootstrap.NewService("service.identity")
 
 	mux := http.NewServeMux()
-	svc.NewHttpServer(loggerMiddleware(mux))
+	s := svc.NewHttpServer(loggerMiddleware(mux))
 
 	handler.SetupRoutes(mux, &handler.Router{
 		Database: svc.Postgres(),
@@ -28,7 +28,7 @@ func main() {
 	fmt.Println("Starting server on :80")
 
 	go func() {
-		if err := svc.StartHttpServer(); !errors.Is(err, http.ErrServerClosed) {
+		if err := s.ListenAndServe(); !errors.Is(err, http.ErrServerClosed) {
 			fmt.Printf("Server error: %v\n", err)
 		}
 	}()
@@ -42,7 +42,7 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	if err := svc.ShutdownHttpServer(ctx); err != nil {
+	if err := s.Shutdown(ctx); err != nil {
 		fmt.Printf("Shutdown error: %v\n", err)
 	}
 

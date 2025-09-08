@@ -1,7 +1,6 @@
 package bootstrap
 
 import (
-	"context"
 	"database/sql"
 	"log"
 	"net/http"
@@ -28,14 +27,6 @@ func (s *service) NewHttpServer(handler http.Handler) *http.Server {
 	}
 
 	return s.server
-}
-
-func (s *service) StartHttpServer() error {
-	return s.server.ListenAndServe()
-}
-
-func (s *service) ShutdownHttpServer(ctx context.Context) error {
-	return s.server.Shutdown(ctx)
 }
 
 func (s *service) Postgres() *sql.DB {
