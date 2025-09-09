@@ -18,10 +18,8 @@ services:
     build:
       context: .
       dockerfile: service.identity/Dockerfile
-    environment:
-      POSTGRES_HOST: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+    env_file:
+      - .env.development
     ports:
       - 9000:80
 
@@ -29,10 +27,8 @@ services:
     build:
       context: .
       dockerfile: service.nutrition/Dockerfile
-    environment:
-      POSTGRES_HOST: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+    env_file:
+      - .env.development
     ports:
       - 9001:80
 
