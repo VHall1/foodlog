@@ -25,6 +25,17 @@ services:
     ports:
       - 9000:80
 
+  service.nutrition:
+    build:
+      context: .
+      dockerfile: service.nutrition/Dockerfile
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 9001:80
+
 volumes:
   postgres_data:
     driver: local
