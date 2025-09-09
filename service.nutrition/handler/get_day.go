@@ -22,7 +22,7 @@ func (_ *Router) GetDay(s *store.DayStore) http.Handler {
 			return
 		}
 
-		day, err := s.GetByID(uint32(id))
+		day, err := s.FindByID(uint32(id))
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
 			return
