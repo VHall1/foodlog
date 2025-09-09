@@ -8,7 +8,7 @@ import (
 	"github.com/vhall1/foodlog/service.identity/store"
 )
 
-func (r *Router) PostLogin(s *store.UserStore) http.Handler {
+func (_ *Router) PostLogin(s *store.UserStore) http.Handler {
 	type request struct {
 		Id uint32 `json:"id"`
 	}

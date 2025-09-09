@@ -9,7 +9,7 @@ import (
 	"github.com/vhall1/foodlog/service.identity/store"
 )
 
-func (r *Router) PostRegister(s *store.UserStore) http.Handler {
+func (_ *Router) PostRegister(s *store.UserStore) http.Handler {
 	type request struct {
 		Name string `json:"name"`
 	}
