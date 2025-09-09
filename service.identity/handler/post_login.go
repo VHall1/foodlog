@@ -10,7 +10,7 @@ import (
 
 func (_ *Router) PostLogin(s *store.UserStore) http.Handler {
 	type request struct {
-		Id uint32 `json:"id"`
+		ID uint32
 	}
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -20,9 +20,9 @@ func (_ *Router) PostLogin(s *store.UserStore) http.Handler {
 			return
 		}
 
-		user, err := s.GetUserByID(req.Id)
+		user, err := s.FindByID(req.ID)
 		if err != nil {
-			log.Default().Printf("Error getting user by ID %d: %v", req.Id, err)
+			log.Default().Printf("Error getting user by ID %d: %v", req.ID, err)
 			http.Error(w, "user not found", http.StatusNotFound)
 			return
 		}
