@@ -30,9 +30,3 @@ func (s *UserStore) GetUserByID(id uint32) (*domain.User, error) {
 	}
 	return user, nil
 }
-
-func (s *UserStore) UpdateUser(user *domain.User) error {
-	query := `UPDATE "User" SET "name" = $1, "updatedAt" = $2 WHERE "id" = $3 RETURNING "name", "updatedAt"`
-	updatedAt := time.Now()
-	return s.db.QueryRow(query, user.Name, updatedAt, user.ID).Scan(&user.Name, &user.UpdatedAt)
-}
