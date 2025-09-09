@@ -13,6 +13,6 @@ type Router struct {
 
 func SetupRoutes(h *http.ServeMux, r *Router) {
 	dayStore := store.NewDayStore(r.Database)
-	h.Handle("GET /days", r.GetDay(dayStore))
+	h.Handle("GET /days/{id}", r.GetDay(dayStore))
 	h.Handle("POST /days", r.PostDay(dayStore))
 }

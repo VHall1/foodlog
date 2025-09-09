@@ -3,23 +3,26 @@ package handler
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 
 	"github.com/vhall1/foodlog/service.nutrition/store"
 )
 
 func (_ *Router) GetDay(s *store.DayStore) http.Handler {
-	type request struct {
-		ID uint32
-	}
-
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		var req request
-		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+		idStr := r.PathValue("id")
+		if idStr == "" {
+			http.Error(w, "missing id parameter", http.StatusBadRequest)
 			return
 		}
 
-		day, err := s.GetByID(req.ID)
+		id, err := strconv.ParseUint(idStr, 10, 32)
+		if err != nil {
+			http.Error(w, "invalid id parameter", http.StatusBadRequest)
+			return
+		}
+
+		day, err := s.GetByID(uint32(id))
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
 			return
